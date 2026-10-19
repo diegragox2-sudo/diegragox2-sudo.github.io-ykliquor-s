@@ -24,10 +24,13 @@
 
   <main class="page">
     <h2>Catálogo</h2>
-    <p class="sub">Filtra por tipo de bebida. Los productos y precios de abajo son de ejemplo y se reemplazarán con el inventario real de la tienda.</p>
+    <p class="sub">Filtra por tipo de bebida. Precios en quetzales. Donde dice "Consultar", pregunta el precio por WhatsApp.</p>
     <div class="chips" role="group" aria-label="Filtrar por categoría" id="chips"></div>
     <div class="grid" id="grid"></div>
-    <p class="note">Ejemplo: precios en quetzales (Q), IVA incluido. Sujetos a disponibilidad.</p>
+
+    <h2 class="gallery-title">Nuestros estantes</h2>
+    <p class="sub">Así se ve lo que tenemos en la tienda, por tipo de licor.</p>
+    <div class="gallery" id="gallery"></div>
   </main>
 
   <footer>
@@ -37,29 +40,145 @@
 </div>
 
 <script>
-/* Para agregar un producto, copia una línea y cambia sus datos.
-   n = nombre, c = categoría, d = descripción, s = presentación, p = precio en Q,
-   img = ruta de la foto (opcional), por ejemplo "img/ron-anejo.jpg". */
+/* PRODUCTOS
+   n = nombre, c = categoría, s = presentación (opcional), p = precio en Q (null = "Consultar"),
+   img = foto del producto (opcional), por ejemplo "img/ron-anejo.jpg".
+   Para agregar un producto, copia una línea y cambia sus datos. */
 var items = [
-  { n: "Whisky escocés 12 años", c: "Whisky", d: "Suave, notas de miel y roble. Para tomar solo o con hielo.", s: "750 ml · 40% vol", p: 285 },
-  { n: "Whisky bourbon", c: "Whisky", d: "Dulce y especiado, ideal para cócteles clásicos.", s: "750 ml · 43% vol", p: 210 },
-  { n: "Ron añejo 12 años", c: "Ron", d: "Reposado en barrica, aroma a caramelo y frutos secos.", s: "750 ml · 40% vol", p: 260 },
-  { n: "Ron blanco", c: "Ron", d: "Ligero y limpio, base para mojitos y daiquiris.", s: "750 ml · 37.5% vol", p: 95 },
-  { n: "Tequila reposado", c: "Tequila", d: "100% agave, seis meses en barrica.", s: "750 ml · 38% vol", p: 230 },
-  { n: "Tequila blanco", c: "Tequila", d: "Fresco y vegetal, para margaritas y shots.", s: "750 ml · 40% vol", p: 175 },
-  { n: "Vodka premium", c: "Vodka", d: "Triple destilado, perfil neutro y limpio.", s: "750 ml · 40% vol", p: 150 },
-  { n: "Vino tinto reserva", c: "Vino", d: "Cuerpo medio, taninos suaves. Va con carnes y pastas.", s: "750 ml · 13.5% vol", p: 135 },
-  { n: "Vino blanco seco", c: "Vino", d: "Cítrico y fresco, sirve bien frío.", s: "750 ml · 12% vol", p: 110 },
-  { n: "Cerveza lager, six pack", c: "Cerveza", d: "Ligera y refrescante, lista para el hielo.", s: "6 × 355 ml · 4.5% vol", p: 62 },
-  { n: "Cerveza artesanal IPA", c: "Cerveza", d: "Amarga y aromática, lúpulo cítrico.", s: "355 ml · 6.5% vol", p: 28 },
-  { n: "Licor de café", c: "Licores", d: "Dulce, para postres o con leche fría.", s: "700 ml · 20% vol", p: 120 }
+  // Ron
+  { n: "Zacapa Solera Gran Reserva", c: "Ron", s: "750 ml", p: 320 },
+  { n: "Zacapa Solera Gran Reserva", c: "Ron", s: "Botella pequeña", p: 220 },
+  { n: "Zacapa Edición Negra", c: "Ron", s: "750 ml", p: null },
+  { n: "Zacapa Passion Cask", c: "Ron", s: "700 ml · estuche", p: null },
+  { n: "Botran Roajú", c: "Ron", s: "Ron de Guatemala", p: 350 },
+  { n: "Botran Sistema Solera 8", c: "Ron", s: "750 ml", p: null },
+  { n: "Botran Sistema Solera 12", c: "Ron", s: "750 ml", p: null },
+  { n: "Botran Reserva Solera 15", c: "Ron", s: "750 ml", p: null },
+  { n: "Botran Solera 18", c: "Ron", s: "750 ml", p: null },
+  { n: "Botran Oro", c: "Ron", s: "", p: null },
+  { n: "Flor de Caña 12 años", c: "Ron", s: "", p: null },
+  { n: "Flor de Caña Oro Reserva", c: "Ron", s: "", p: null },
+  { n: "Flor de Caña Centenario Gold 18", c: "Ron", s: "", p: null },
+  { n: "Barceló Gran Añejo", c: "Ron", s: "", p: null },
+  { n: "Venado Light, ron blanco", c: "Ron", s: "Varias presentaciones", p: null },
+  { n: "XL Original, ron blanco", c: "Ron", s: "750 ml · 35% vol", p: 60 },
+  { n: "XL Original, ron blanco", c: "Ron", s: "375 ml · 35% vol", p: 30 },
+  { n: "XL Original, ron blanco", c: "Ron", s: "250 ml · 35% vol", p: 20 },
+  { n: "XL Colors Limón y manzana", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Colors Limón y pepino", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Colors Melón y naranja", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Summer Maracuyá", c: "Ron", s: "", p: null },
+  { n: "XL Sour Blast Watermelon", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Sour Blast Juicy Mango", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Sour Blast Green Apple", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Sour Blast Bubble Gum", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Sour Blast Neon Lemonade", c: "Ron", s: "750 ml · 25% vol", p: null },
+  { n: "XL Sour Blast Mixed Berries", c: "Ron", s: "750 ml · 25% vol", p: null },
+
+  // Whisky
+  { n: "Johnnie Walker Black Label 12 años", c: "Whisky", s: "750 ml", p: null },
+  { n: "Johnnie Walker Red Label", c: "Whisky", s: "", p: null },
+  { n: "Old Parr 12 años", c: "Whisky", s: "750 ml", p: null },
+  { n: "Old Parr Silver", c: "Whisky", s: "750 ml", p: null },
+  { n: "Sir Mark Royal", c: "Whisky", s: "", p: null },
+  { n: "Old Friend", c: "Whisky", s: "", p: null },
+
+  // Vodka
+  { n: "Smirnoff No. 21", c: "Vodka", s: "", p: null },
+  { n: "Smirnoff Spicy Tamarind", c: "Vodka", s: "", p: null },
+  { n: "Absolut", c: "Vodka", s: "", p: null },
+
+  // Ginebra
+  { n: "Windsor Pink Gin", c: "Ginebra", s: "", p: null },
+  { n: "Xibal Gin", c: "Ginebra", s: "", p: null },
+
+  // Aguardiente
+  { n: "Quezalteca Especial", c: "Aguardiente", s: "Botella grande", p: 50 },
+  { n: "Quezalteca Especial", c: "Aguardiente", s: "Botella pequeña", p: 20 },
+  { n: "Venado, aguardiente", c: "Aguardiente", s: "1 L", p: 65 },
+  { n: "Guacá Anisado Dulce", c: "Aguardiente", s: "Botella pequeña", p: null },
+
+  // Licores
+  { n: "Quezalteca Mora", c: "Licores", s: "1 L · 15% vol", p: 65 },
+  { n: "Quezalteca Sandía", c: "Licores", s: "1 L · 15% vol", p: 65 },
+  { n: "Quezalteca Naranja Pepita", c: "Licores", s: "1 L · 15% vol", p: 65 },
+  { n: "Quezalteca Tamarindo", c: "Licores", s: "1 L", p: null },
+  { n: "Quezalteca licores en botella pequeña", c: "Licores", s: "Varios sabores", p: null },
+  { n: "Venado Canela", c: "Licores", s: "1 L", p: 65 },
+  { n: "Baileys Original", c: "Licores", s: "", p: null },
+  { n: "Jägermeister", c: "Licores", s: "", p: null },
+  { n: "Gran Malo, licor con tequila sabor horchata", c: "Licores", s: "750 ml", p: null },
+  { n: "Crema de Almendrado con tequila, Orendain", c: "Licores", s: "", p: null },
+
+  // Tequila y mezcal
+  { n: "Mezcal Reserva del Viejo", c: "Tequila y mezcal", s: "1 L", p: null },
+  { n: "Mezcal Ojo de Tigre, artesanal", c: "Tequila y mezcal", s: "", p: null },
+  { n: "Mezcal Papaito, espadín joven", c: "Tequila y mezcal", s: "Oaxaca", p: null },
+
+  // Brandy
+  { n: "Presidente Brandy Clásico", c: "Brandy", s: "", p: null },
+  { n: "Torres 5", c: "Brandy", s: "", p: null },
+  { n: "Don Pedro Reserva Especial", c: "Brandy", s: "", p: null },
+
+  // Vino
+  { n: "Gran Andes del Sur Vino Blanco", c: "Vino", s: "1 litro", p: 55 },
+  { n: "Gran Andes del Sur Cabernet Sauvignon", c: "Vino", s: "1 litro", p: 55 },
+  { n: "Gran Andes del Sur Merlot", c: "Vino", s: "1 litro", p: 55 },
+  { n: "A Feeling For Chardonnay, semi dulce", c: "Vino", s: "750 ml · Valle Central, Chile", p: null },
+  { n: "A Feeling For Cabernet Sauvignon, semi dulce", c: "Vino", s: "750 ml · Valle Central, Chile", p: null },
+  { n: "A Feeling For Merlot, semi dulce", c: "Vino", s: "750 ml · Valle Central, Chile", p: null },
+  { n: "Viña Maipo Sweet Red", c: "Vino", s: "750 ml", p: 55 },
+  { n: "Viña Maipo Sangría", c: "Vino", s: "750 ml", p: 55 },
+  { n: "Carlo Rossi Red", c: "Vino", s: "", p: null },
+  { n: "Carlo Rossi Sangría", c: "Vino", s: "", p: null },
+  { n: "Morandé Pionero Reserva Cabernet Sauvignon", c: "Vino", s: "Valle del Maule, Chile", p: null },
+  { n: "Morandé Pionero Reserva Carmenère", c: "Vino", s: "Valle del Maule, Chile", p: null },
+  { n: "Santa Helena Reserva Siglo de Oro Carmenère", c: "Vino", s: "", p: null },
+  { n: "3 Medallas Cabernet Sauvignon", c: "Vino", s: "", p: null },
+  { n: "Gato Negro Red Blend", c: "Vino", s: "", p: null },
+  { n: "Infiel Red Blend", c: "Vino", s: "750 ml", p: null },
+  { n: "Casillero del Diablo Reserva Carmenere", c: "Vino", s: "", p: null },
+  { n: "Diablo Dark Red", c: "Vino", s: "Valle del Maule, Chile", p: null },
+  { n: "Calvet Rosé d'Anjou", c: "Vino", s: "", p: null },
+  { n: "Calvet Vino Blanco", c: "Vino", s: "", p: null },
+
+  // Sidra
+  { n: "Castellana Sidra Rosada", c: "Sidra", s: "", p: null },
+
+  // Mezcladores
+  { n: "Master of Mixes Classic Bloody Mary Mixer", c: "Mezcladores", s: "", p: 55 }
 ];
 
+/* FOTOS DE LOS ESTANTES: c = categorías que aparecen en cada foto */
+var photos = [
+  { f: "img/tienda-01.jpg", c: ["Vino", "Sidra", "Ron"] },
+  { f: "img/tienda-02.jpg", c: ["Ron", "Aguardiente", "Licores"] },
+  { f: "img/tienda-03.jpg", c: ["Vino", "Mezcladores", "Aguardiente", "Licores"] },
+  { f: "img/tienda-04.jpg", c: ["Vino", "Sidra"] },
+  { f: "img/tienda-05.jpg", c: ["Vino"] },
+  { f: "img/tienda-06.jpg", c: ["Vino", "Licores"] },
+  { f: "img/tienda-07.jpg", c: ["Vino", "Licores", "Brandy"] },
+  { f: "img/tienda-08.jpg", c: ["Vino", "Vodka"] },
+  { f: "img/tienda-09.jpg", c: ["Vodka", "Ron"] },
+  { f: "img/tienda-10.jpg", c: ["Tequila y mezcal", "Licores", "Brandy"] },
+  { f: "img/tienda-11.jpg", c: ["Aguardiente", "Licores"] },
+  { f: "img/tienda-12.jpg", c: ["Ron", "Tequila y mezcal"] },
+  { f: "img/tienda-13.jpg", c: ["Ron", "Brandy", "Tequila y mezcal"] },
+  { f: "img/tienda-14.jpg", c: ["Licores", "Aguardiente"] },
+  { f: "img/tienda-15.jpg", c: ["Ron"] },
+  { f: "img/tienda-16.jpg", c: ["Ron", "Licores", "Ginebra", "Brandy"] },
+  { f: "img/tienda-17.jpg", c: ["Ron"] },
+  { f: "img/tienda-18.jpg", c: ["Ron", "Ginebra", "Brandy", "Whisky"] },
+  { f: "img/tienda-19.jpg", c: ["Whisky"] },
+  { f: "img/tienda-20.jpg", c: ["Whisky", "Ron", "Brandy"] }
+];
+
+var order = ["Todos", "Ron", "Whisky", "Vodka", "Ginebra", "Aguardiente", "Licores", "Tequila y mezcal", "Brandy", "Vino", "Sidra", "Mezcladores"];
+
 (function () {
-  var cats = ["Todos"];
-  items.forEach(function (i) { if (cats.indexOf(i.c) < 0) cats.push(i.c); });
   var chips = document.getElementById("chips");
   var grid = document.getElementById("grid");
+  var gallery = document.getElementById("gallery");
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
 
@@ -67,22 +186,42 @@ var items = [
     var el = document.createElement("article");
     el.className = "card";
     el.setAttribute("data-cat", i.c);
-    var photo = i.img ? '<img class="photo" src="' + esc(i.img) + '" alt="' + esc(i.n) + '">' : "";
-    el.innerHTML = photo + '<span class="cat">' + esc(i.c) + '</span><h3>' + esc(i.n) + '</h3><p>' + esc(i.d) +
-      '</p><div class="meta"><span class="spec">' + esc(i.s) + '</span><span class="price">Q ' + esc(i.p) + '</span></div>';
+    var photo = i.img ? '<img class="photo" src="' + esc(i.img) + '" alt="' + esc(i.n) + '" loading="lazy">' : "";
+    var price = (i.p === null || i.p === undefined)
+      ? '<span class="price ask">Consultar</span>'
+      : '<span class="price">Q ' + esc(i.p) + '</span>';
+    el.innerHTML = photo + '<span class="cat">' + esc(i.c) + '</span><h3>' + esc(i.n) + '</h3>' +
+      '<div class="meta"><span class="spec">' + esc(i.s || "") + '</span>' + price + '</div>';
     grid.appendChild(el);
   });
 
-  cats.forEach(function (c, idx) {
+  photos.forEach(function (ph) {
+    var fig = document.createElement("figure");
+    fig.className = "shot";
+    fig.setAttribute("data-cats", ph.c.join("|"));
+    fig.innerHTML = '<img src="' + esc(ph.f) + '" alt="Estante con ' + esc(ph.c.join(", ").toLowerCase()) + '" loading="lazy">' +
+      '<figcaption>' + esc(ph.c.join(" · ")) + '</figcaption>';
+    gallery.appendChild(fig);
+  });
+
+  function apply(c) {
+    grid.querySelectorAll(".card").forEach(function (card) {
+      card.hidden = !(c === "Todos" || card.getAttribute("data-cat") === c);
+    });
+    gallery.querySelectorAll(".shot").forEach(function (s) {
+      var cats = s.getAttribute("data-cats").split("|");
+      s.hidden = !(c === "Todos" || cats.indexOf(c) >= 0);
+    });
+  }
+
+  order.forEach(function (c, idx) {
     var b = document.createElement("button");
     b.type = "button"; b.className = "chip"; b.textContent = c;
     b.setAttribute("aria-pressed", idx === 0 ? "true" : "false");
     b.addEventListener("click", function () {
       chips.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
       b.setAttribute("aria-pressed", "true");
-      grid.querySelectorAll(".card").forEach(function (card) {
-        card.hidden = !(c === "Todos" || card.getAttribute("data-cat") === c);
-      });
+      apply(c);
     });
     chips.appendChild(b);
   });
