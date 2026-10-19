@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>YK LIQUORS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: etiqueta de botella. Cabecera simple, portada con siluetas de botellas, catalogo filtrable en rejilla, combos, nosotros y contacto. */
+:root {
+  --bg: #0a0a0a;
+  --surface: #151515;
+  --surface-2: #202020;
+  --fg: #f5f5f5;
+  --muted: #a6a6a6;
+  --line: #343434;
+  --accent: #ffffff;
+  --accent-ink: #0a0a0a;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Instrument Sans", system-ui, sans-serif;
+  --mono: "DM Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #ffffff; --surface: #f4f4f4; --surface-2: #e8e8e8; --fg: #0a0a0a; --muted: #555555;
+    --line: #d2d2d2; --accent: #0a0a0a; --accent-ink: #ffffff; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #ffffff; --surface: #f4f4f4; --surface-2: #e8e8e8; --fg: #0a0a0a; --muted: #555555;
+  --line: #d2d2d2; --accent: #0a0a0a; --accent-ink: #ffffff; color-scheme: light;
+}
+:root { color-scheme: dark; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { color-scheme: light; } }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wrap {
+  max-width: 1120px; margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.age {
+  background: var(--accent); color: var(--accent-ink); font-family: var(--mono); font-size: 12px;
+  letter-spacing: .06em; text-transform: uppercase; text-align: center; padding-block: 8px;
+}
+header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px; }
+.logo { font-family: var(--display); font-weight: 900; font-size: 30px; letter-spacing: .04em; text-decoration: none; line-height: 1; }
+.logo b { color: var(--accent); font-weight: 900; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--fg); }
+
+.hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center; padding-block: 40px 56px; }
+.hero > * { min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(56px, 11vw, 132px); line-height: .88; margin: 0 0 20px; text-transform: uppercase; text-wrap: balance; }
+h1 span { color: var(--accent); }
+.lead { max-width: 46ch; color: var(--muted); font-size: 18px; margin: 0 0 28px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 13px 22px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent); border-radius: 4px; font-size: 15px; cursor: pointer; font-family: var(--body); }
+.btn.solid { background: var(--accent); color: var(--accent-ink); }
+.btn.ghost { background: transparent; color: var(--fg); }
+.btn:hover { filter: brightness(1.08); }
+.back { margin-bottom: 20px; padding: 8px 16px; font-size: 14px; }
+.bottles { width: 100%; max-width: 100%; height: auto; display: block; }
+
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-block: 1px solid var(--line); }
+.facts div { padding: 18px 16px; border-left: 1px solid var(--line); }
+.facts div:first-child { border-left: 0; }
+.facts strong { display: block; font-family: var(--display); font-size: 26px; letter-spacing: .03em; text-transform: uppercase; }
+.facts span { color: var(--muted); font-size: 14px; }
+
+section { padding-block: 64px 0; }
+h2 { font-family: var(--display); font-weight: 800; font-size: clamp(36px, 6vw, 56px); text-transform: uppercase; line-height: 1; margin: 0 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+
+.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+.chip { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card[hidden] { display: none; }
+.cat { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.card h3 { font-family: var(--display); font-weight: 800; font-size: 25px; line-height: 1.05; margin: 0; text-transform: uppercase; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
+.meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line); }
+.spec { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.price { font-family: var(--display); font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; }
+.note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 18px; }
+
+.combos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+.combo { background: var(--surface-2); border-radius: 6px; padding: 22px; min-width: 0; }
+.combo h3 { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; margin: 0 0 6px; }
+.combo ul { margin: 10px 0 14px; padding-left: 18px; color: var(--muted); font-size: 15px; }
+.combo .price { color: var(--accent); }
+
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.about > * { min-width: 0; }
+.about p { color: var(--muted); max-width: 52ch; margin: 0 0 14px; }
+.pillars { display: grid; gap: 14px; }
+.pillars div { border-left: 3px solid var(--accent); padding-left: 14px; }
+.pillars strong { display: block; font-family: var(--display); font-size: 22px; text-transform: uppercase; letter-spacing: .02em; }
+.pillars span { color: var(--muted); font-size: 15px; }
+
+.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.box { border: 1px solid var(--line); border-radius: 6px; padding: 20px; background: var(--surface); min-width: 0; }
+.box h3 { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; font-weight: 500; }
+.box p { margin: 0 0 6px; }
+.box .big { font-family: var(--display); font-size: 30px; font-weight: 800; letter-spacing: .03em; overflow-wrap: anywhere; }
+.copy { margin-top: 8px; font-size: 13px; padding: 6px 12px; }
+
+footer { margin-top: 72px; border-top: 1px solid var(--line); padding-block: 28px 36px; color: var(--muted); font-size: 13px; }
+footer p { margin: 0 0 6px; max-width: 70ch; }
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; padding-block: 24px 40px; }
+  .bottles { max-width: 320px; }
+  .about { grid-template-columns: 1fr; gap: 24px; }
+  .facts div { border-left: 0; border-top: 1px solid var(--line); }
+  .facts div:first-child { border-top: 0; }
+  section { padding-block: 48px 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card, .btn, .chip { transition: transform .15s ease, filter .15s ease, border-color .15s ease; }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+}
+</style>
+
+<div class="age">Venta exclusiva a mayores de 18 años · Bebe con responsabilidad</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="#inicio" data-view="inicio">YK <b>LIQUORS</b></a>
+    <nav aria-label="Principal">
+      <a href="#inicio" data-view="inicio">Inicio</a>
+      <a href="#catalogo" data-view="catalogo">Catálogo</a>
+      <a href="#combos" data-view="combos">Combos</a>
+      <a href="#nosotros" data-view="inicio" data-target="nosotros">Nosotros</a>
+      <a href="#contacto" data-view="inicio" data-target="contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <div class="hero home">
+      <div>
+        <p class="eyebrow">Licorería · Guatemala</p>
+        <h1>Lo que se brinda, <span>lo tenemos.</span></h1>
+        <p class="lead">Whisky, ron, tequila, vodka, vino y cerveza fría para tu reunión, tu regalo o tu fin de semana. Pide por WhatsApp o pasa a la tienda.</p>
+        <div class="cta">
+          <a class="btn solid" href="#catalogo" data-view="catalogo">Ver catálogo</a>
+          <a class="btn ghost" href="#combos" data-view="combos">Ver combos</a>
+        </div>
+      </div>
+      <svg class="bottles" viewBox="0 0 320 340" role="img" aria-label="Siluetas de tres botellas">
+        <g fill="var(--surface-2)" stroke="var(--line)" stroke-width="2">
+          <path d="M40 330V150q0-24 12-40l6-10V40h28v60l6 10q12 16 12 40v180z"/>
+          <path d="M120 330V130q0-30 18-52V20h26v58q18 22 18 52v200z"/>
+          <path d="M214 330V170q0-22 10-36l8-12V70h26v52l8 12q10 14 10 36v160z"/>
+        </g>
+        <g fill="var(--accent)">
+          <rect x="46" y="190" width="64" height="70" rx="3"/>
+          <rect x="130" y="180" width="64" height="86" rx="3"/>
+          <rect x="220" y="204" width="64" height="62" rx="3"/>
+        </g>
+        <g fill="var(--accent-ink)" font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="26" text-anchor="middle">
+          <text x="78" y="236">YK</text>
+          <text x="162" y="232">YK</text>
+          <text x="252" y="245">YK</text>
+        </g>
+        <rect x="10" y="328" width="300" height="3" fill="var(--line)"/>
+      </svg>
+    </div>
+
+    <div class="facts home">
+      <div><strong>750 ml · 1 L</strong><span>Presentaciones para cada ocasión</span></div>
+      <div><strong>Precios en Q</strong><span>Quetzales, con factura</span></div>
+      <div><strong>Bebidas frías</strong><span>Cerveza y vinos listos para llevar</span></div>
+      <div><strong>Solo +18</strong><span>Pedimos identificación</span></div>
+    </div>
+
+    <section id="catalogo" class="view" hidden>
+      <button class="btn ghost back" type="button" data-view="inicio">← Volver al inicio</button>
+      <h2>Catálogo</h2>
+      <p class="sub">Filtra por tipo de bebida. Los productos y precios de abajo son de ejemplo; reemplázalos con tu inventario real.</p>
+      <div class="chips" role="group" aria-label="Filtrar por categoría" id="chips"></div>
+      <div class="grid" id="grid"></div>
+      <p class="note">Ejemplo: precios en quetzales (Q), IVA incluido. Sujetos a disponibilidad.</p>
+    </section>
+
+    <section id="combos" class="view" hidden>
+      <button class="btn ghost back" type="button" data-view="inicio">← Volver al inicio</button>
+      <h2>Combos</h2>
+      <p class="sub">Paquetes armados para que no tengas que pensar en cuánto comprar.</p>
+      <div class="combos">
+        <div class="combo">
+          <h3>Pre-fiesta</h3>
+          <ul><li>1 botella de ron añejo 750 ml</li><li>1 botella de vodka 750 ml</li><li>Hielo y 6 bebidas mezcladoras</li></ul>
+          <span class="price">Q 450</span>
+        </div>
+        <div class="combo">
+          <h3>Cena en casa</h3>
+          <ul><li>2 botellas de vino tinto</li><li>1 botella de vino blanco</li><li>1 licor de sobremesa</li></ul>
+          <span class="price">Q 520</span>
+        </div>
+        <div class="combo">
+          <h3>Regalo</h3>
+          <ul><li>Whisky 12 años 750 ml</li><li>Estuche de regalo</li><li>Tarjeta con tu mensaje</li></ul>
+          <span class="price">Q 340</span>
+        </div>
+      </div>
+      <p class="note">Ejemplo: combos y precios de muestra.</p>
+    </section>
+
+    <section id="nosotros" class="home">
+      <div class="about">
+        <div>
+          <h2>Una licorería de barrio, bien surtida</h2>
+          <p>YK LIQUORS reúne destilados, vinos y cervezas de todos los estilos en un solo lugar, con precios claros y atención directa.</p>
+          <p>Te ayudamos a elegir según la ocasión y el presupuesto, sin vueltas.</p>
+        </div>
+        <div class="pillars">
+          <div><strong>Surtido amplio</strong><span>Desde lo de todos los días hasta botellas para regalar.</span></div>
+          <div><strong>Precio a la vista</strong><span>Lo que ves en el catálogo es lo que pagas.</span></div>
+          <div><strong>Venta responsable</strong><span>No vendemos a menores de 18 años. Si conduces, no bebas.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="home">
+      <h2>Contacto</h2>
+      <p class="sub">Escríbenos para pedidos, disponibilidad o pedidos grandes para eventos.</p>
+      <div class="contact">
+        <div class="box">
+          <h3>WhatsApp</h3>
+          <p class="big" id="phone">+502 0000 0000</p>
+          <p style="color:var(--muted);font-size:14px">Número de ejemplo.</p>
+          <button class="btn ghost copy" id="copyBtn" type="button">Copiar número</button>
+        </div>
+        <div class="box">
+          <h3>Dirección</h3>
+          <p class="big">Ciudad de Guatemala</p>
+          <p style="color:var(--muted);font-size:14px">Agrega aquí la zona y la calle de la tienda.</p>
+        </div>
+        <div class="box">
+          <h3>Horario</h3>
+          <p class="big">Lun a Sáb</p>
+          <p style="color:var(--muted);font-size:14px">Horario de ejemplo: 10:00 a 21:00.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>YK LIQUORS</strong> · Todos los derechos reservados.</p>
+    <p>El exceso de alcohol es dañino para la salud. Prohibida la venta a menores de 18 años.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var items = [
+    { n: "Whisky escocés 12 años", c: "Whisky", d: "Suave, notas de miel y roble. Para tomar solo o con hielo.", s: "750 ml · 40% vol", p: 285 },
+    { n: "Whisky bourbon", c: "Whisky", d: "Dulce y especiado, ideal para cócteles clásicos.", s: "750 ml · 43% vol", p: 210 },
+    { n: "Ron añejo 12 años", c: "Ron", d: "Reposado en barrica, aroma a caramelo y frutos secos.", s: "750 ml · 40% vol", p: 260 },
+    { n: "Ron blanco", c: "Ron", d: "Ligero y limpio, base para mojitos y daiquiris.", s: "750 ml · 37.5% vol", p: 95 },
+    { n: "Tequila reposado", c: "Tequila", d: "100% agave, seis meses en barrica.", s: "750 ml · 38% vol", p: 230 },
+    { n: "Tequila blanco", c: "Tequila", d: "Fresco y vegetal, para margaritas y shots.", s: "750 ml · 40% vol", p: 175 },
+    { n: "Vodka premium", c: "Vodka", d: "Triple destilado, perfil neutro y limpio.", s: "750 ml · 40% vol", p: 150 },
+    { n: "Vino tinto reserva", c: "Vino", d: "Cuerpo medio, taninos suaves. Va con carnes y pastas.", s: "750 ml · 13.5% vol", p: 135 },
+    { n: "Vino blanco seco", c: "Vino", d: "Cítrico y fresco, sirve bien frío.", s: "750 ml · 12% vol", p: 110 },
+    { n: "Cerveza lager, six pack", c: "Cerveza", d: "Ligera y refrescante, lista para el hielo.", s: "6 × 355 ml · 4.5% vol", p: 62 },
+    { n: "Cerveza artesanal IPA", c: "Cerveza", d: "Amarga y aromática, lúpulo cítrico.", s: "355 ml · 6.5% vol", p: 28 },
+    { n: "Licor de café", c: "Licores", d: "Dulce, para postres o con leche fría.", s: "700 ml · 20% vol", p: 120 }
+  ];
+  var cats = ["Todos"];
+  items.forEach(function (i) { if (cats.indexOf(i.c) < 0) cats.push(i.c); });
+
+  var chips = document.getElementById("chips");
+  var grid = document.getElementById("grid");
+
+  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+
+  items.forEach(function (i) {
+    var el = document.createElement("article");
+    el.className = "card";
+    el.setAttribute("data-cat", i.c);
+    el.innerHTML = '<span class="cat">' + esc(i.c) + '</span><h3>' + esc(i.n) + '</h3><p>' + esc(i.d) +
+      '</p><div class="meta"><span class="spec">' + esc(i.s) + '</span><span class="price">Q ' + i.p + '</span></div>';
+    grid.appendChild(el);
+  });
+
+  cats.forEach(function (c, idx) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = c;
+    b.setAttribute("aria-pressed", idx === 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      chips.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      grid.querySelectorAll(".card").forEach(function (card) {
+        card.hidden = !(c === "Todos" || card.getAttribute("data-cat") === c);
+      });
+    });
+    chips.appendChild(b);
+  });
+
+  var homes = document.querySelectorAll(".home");
+  var views = document.querySelectorAll(".view");
+  function show(name, target) {
+    var inHome = name === "inicio";
+    homes.forEach(function (h) { h.hidden = !inHome; });
+    views.forEach(function (v) { v.hidden = v.id !== name; });
+    var el = target ? document.getElementById(target) : null;
+    if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
+  }
+  document.querySelectorAll("[data-view]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      show(a.getAttribute("data-view"), a.getAttribute("data-target"));
+    });
+  });
+
+  var btn = document.getElementById("copyBtn");
+  btn.addEventListener("click", function () {
+    var txt = document.getElementById("phone").textContent;
+    var done = function () { btn.textContent = "Copiado"; setTimeout(function () { btn.textContent = "Copiar número"; }, 1500); };
+    try {
+      navigator.clipboard.writeText(txt).then(done, function () {
+        var r = document.createRange(); r.selectNodeContents(document.getElementById("phone"));
+        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      });
+    } catch (e) {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById("phone"));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+  });
+})();
+</script>
+
+</html>
