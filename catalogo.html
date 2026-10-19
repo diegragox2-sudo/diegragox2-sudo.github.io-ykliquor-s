@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo · YK LIQUORS</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="age">Venta exclusiva a mayores de 18 años · Bebe con responsabilidad</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="logo" href="index.html">YK LIQUORS</a>
+    <nav aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html" aria-current="page">Catálogo</a>
+      <a href="combos.html">Combos</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <h2>Catálogo</h2>
+    <p class="sub">Filtra por tipo de bebida. Los productos y precios de abajo son de ejemplo y se reemplazarán con el inventario real de la tienda.</p>
+    <div class="chips" role="group" aria-label="Filtrar por categoría" id="chips"></div>
+    <div class="grid" id="grid"></div>
+    <p class="note">Ejemplo: precios en quetzales (Q), IVA incluido. Sujetos a disponibilidad.</p>
+  </main>
+
+  <footer>
+    <p><strong>YK LIQUORS</strong> · Todos los derechos reservados.</p>
+    <p>El exceso de alcohol es dañino para la salud. Prohibida la venta a menores de 18 años.</p>
+  </footer>
+</div>
+
+<script>
+/* Para agregar un producto, copia una línea y cambia sus datos.
+   n = nombre, c = categoría, d = descripción, s = presentación, p = precio en Q,
+   img = ruta de la foto (opcional), por ejemplo "img/ron-anejo.jpg". */
+var items = [
+  { n: "Whisky escocés 12 años", c: "Whisky", d: "Suave, notas de miel y roble. Para tomar solo o con hielo.", s: "750 ml · 40% vol", p: 285 },
+  { n: "Whisky bourbon", c: "Whisky", d: "Dulce y especiado, ideal para cócteles clásicos.", s: "750 ml · 43% vol", p: 210 },
+  { n: "Ron añejo 12 años", c: "Ron", d: "Reposado en barrica, aroma a caramelo y frutos secos.", s: "750 ml · 40% vol", p: 260 },
+  { n: "Ron blanco", c: "Ron", d: "Ligero y limpio, base para mojitos y daiquiris.", s: "750 ml · 37.5% vol", p: 95 },
+  { n: "Tequila reposado", c: "Tequila", d: "100% agave, seis meses en barrica.", s: "750 ml · 38% vol", p: 230 },
+  { n: "Tequila blanco", c: "Tequila", d: "Fresco y vegetal, para margaritas y shots.", s: "750 ml · 40% vol", p: 175 },
+  { n: "Vodka premium", c: "Vodka", d: "Triple destilado, perfil neutro y limpio.", s: "750 ml · 40% vol", p: 150 },
+  { n: "Vino tinto reserva", c: "Vino", d: "Cuerpo medio, taninos suaves. Va con carnes y pastas.", s: "750 ml · 13.5% vol", p: 135 },
+  { n: "Vino blanco seco", c: "Vino", d: "Cítrico y fresco, sirve bien frío.", s: "750 ml · 12% vol", p: 110 },
+  { n: "Cerveza lager, six pack", c: "Cerveza", d: "Ligera y refrescante, lista para el hielo.", s: "6 × 355 ml · 4.5% vol", p: 62 },
+  { n: "Cerveza artesanal IPA", c: "Cerveza", d: "Amarga y aromática, lúpulo cítrico.", s: "355 ml · 6.5% vol", p: 28 },
+  { n: "Licor de café", c: "Licores", d: "Dulce, para postres o con leche fría.", s: "700 ml · 20% vol", p: 120 }
+];
+
+(function () {
+  var cats = ["Todos"];
+  items.forEach(function (i) { if (cats.indexOf(i.c) < 0) cats.push(i.c); });
+  var chips = document.getElementById("chips");
+  var grid = document.getElementById("grid");
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); }
+
+  items.forEach(function (i) {
+    var el = document.createElement("article");
+    el.className = "card";
+    el.setAttribute("data-cat", i.c);
+    var photo = i.img ? '<img class="photo" src="' + esc(i.img) + '" alt="' + esc(i.n) + '">' : "";
+    el.innerHTML = photo + '<span class="cat">' + esc(i.c) + '</span><h3>' + esc(i.n) + '</h3><p>' + esc(i.d) +
+      '</p><div class="meta"><span class="spec">' + esc(i.s) + '</span><span class="price">Q ' + esc(i.p) + '</span></div>';
+    grid.appendChild(el);
+  });
+
+  cats.forEach(function (c, idx) {
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = c;
+    b.setAttribute("aria-pressed", idx === 0 ? "true" : "false");
+    b.addEventListener("click", function () {
+      chips.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      b.setAttribute("aria-pressed", "true");
+      grid.querySelectorAll(".card").forEach(function (card) {
+        card.hidden = !(c === "Todos" || card.getAttribute("data-cat") === c);
+      });
+    });
+    chips.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>
