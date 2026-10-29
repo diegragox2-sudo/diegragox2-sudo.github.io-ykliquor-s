@@ -114,7 +114,7 @@
   }
   .btn-cambiar:hover { background: #000; color: var(--paper); }
 
-  /* Botón de catálogo (todavía sin página) */
+  /* Botón de catálogo */
   .cta {
     width: 100%;
     margin-top: 1.1rem;
@@ -237,7 +237,7 @@
   .opcion[aria-pressed="true"] .marca-ok svg { stroke: #fff; opacity: 1; }
   .nota { font-size: 0.85rem; }
 
-  /* En celular la pestaña pasa a una barra arriba para no tapar el contenido */
+  /* Ajuste para dispositivos móviles */
   @media (max-width: 640px) {
     body { padding-top: 4.5rem; }
     .tab-sucursal {
@@ -316,27 +316,21 @@
 </main>
 
 <script>
-  /* ===== DATOS DE LA TIENDA: cambia solo esta parte =====
-     telefono: 8 números de Guatemala, con o sin guion.
-     instagram, facebook, tiktok: el nombre de usuario, sin @ ni enlace.
-     Los valores de abajo son de ejemplo. */
-  var CONFIG = {
-    telefono: "3321-0940",
-    instagram: "ykliquors",
-    watsapp: "33210940",
-    sucursales: [
-      { id: "salcaja", nombre: "Salcajá", detalle: "Sucursal Salcajá" },
-      { id: "xela",    nombre: "Xela",    detalle: "Quetzaltenango" }
-    ]
-  };
-
   (function () {
+    /* Configuración de la tienda */
+    var CONFIG = {
+      telefono: "3321-0940",
+      instagram: "ykliquors",
+      sucursales: [
+        { id: "salcaja", nombre: "Salcajá", detalle: "Sucursal Salcajá" },
+        { id: "xela",    nombre: "Xela",    detalle: "Quetzaltenango" }
+      ]
+    };
+
     var ICONOS = {
       whatsapp: '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23s-3.69 8.24-8.23 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.28Z"/>',
       telefono: '<path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/>',
-      instagram: '<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 1.8A3.8 3.8 0 0 0 3.8 7.6v8.8a3.8 3.8 0 0 0 3.8 3.8h8.8a3.8 3.8 0 0 0 3.8-3.8V7.6a3.8 3.8 0 0 0-3.8-3.8H7.6Zm9.65 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 6.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2Zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Z"/>',
-      facebook: '<path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.95.4-1.7 1.8-1.7h1.6V3.2C16.6 3.1 15.6 3 14.6 3c-2.7 0-4.4 1.6-4.4 4.5v3H7.4v3.3h2.8V22h3.3Z"/>',
-      tiktok: '<path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/>'
+      instagram: '<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 1.8A3.8 3.8 0 0 0 3.8 7.6v8.8a3.8 3.8 0 0 0 3.8 3.8h8.8a3.8 3.8 0 0 0 3.8-3.8V7.6a3.8 3.8 0 0 0-3.8-3.8H7.6Zm9.65 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 6.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2Zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Z"/>'
     };
     var FLECHA = '<path d="M9 5l7 7-7 7"/>';
     var SVGNS = "http://www.w3.org/2000/svg";
@@ -354,14 +348,14 @@
       return s;
     }
 
-    /* ---- Lista de contacto y redes ---- */
+    /* ---- Generación de botones de contacto ---- */
     var tel = soloDigitos(CONFIG.telefono);
     var enlaces = [
-      { id: "whatsapp",  nombre: "WhatsApp",  dato: conGuion(CONFIG.telefono), href: "https://wa.me/50233210940" + tel, externo: true },
-      { id: "telefono",  nombre: "Llamar",    dato: conGuion(CONFIG.telefono), href: "tel:+502 33210940" + tel, externo: false },
-      { id: "instagram", nombre: "Instagram", dato: "@" + limpiarUsuario(CONFIG.instagram), href: "https://www.instagram.com/ykliquors/" + limpiarUsuario(CONFIG.instagram), externo: true },
-
+      { id: "whatsapp",  nombre: "WhatsApp",  dato: conGuion(CONFIG.telefono), href: "https://wa.me/502" + tel, externo: true },
+      { id: "telefono",  nombre: "Llamar",    dato: conGuion(CONFIG.telefono), href: "tel:+502" + tel, externo: false },
+      { id: "instagram", nombre: "Instagram", dato: "@" + limpiarUsuario(CONFIG.instagram), href: "https://www.instagram.com/" + limpiarUsuario(CONFIG.instagram) + "/", externo: true }
     ];
+
     var lista = document.getElementById("redes");
     enlaces.forEach(function (e) {
       var li = document.createElement("li");
@@ -381,7 +375,7 @@
       lista.appendChild(li);
     });
 
-    /* ---- Sucursal ---- */
+    /* ---- Manejo de Sucursal ---- */
     var CLAVE = "yk-sucursal";
     var elegida = null;
     try { elegida = localStorage.getItem(CLAVE); } catch (e) {}
@@ -441,8 +435,9 @@
       velo.classList.add("abierto");
       tab.setAttribute("aria-expanded", "true");
       var objetivo = panel.querySelector('.opcion[aria-pressed="true"]') || botones[0];
-      setTimeout(function () { objetivo.focus(); }, 60);
+      setTimeout(function () { if(objetivo) objetivo.focus(); }, 60);
     }
+    
     function cerrarPanel() {
       if (!panel.classList.contains("abierto")) return;
       panel.classList.remove("abierto");
