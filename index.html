@@ -304,7 +304,7 @@
   </section>
 
   <section class="contacto" aria-labelledby="contacto-titulo">
-    <h2 id="contacto-titulo">Escríbenos o llámanos</h2>
+    <h2 id="contacto-titulo">Escríbenos</h2>
     <ul class="redes" id="redes"></ul>
     <noscript><p class="pie">Activa JavaScript para ver los datos de contacto.</p></noscript>
   </section>
@@ -319,7 +319,7 @@
   (function () {
     /* Configuración de la tienda */
     var CONFIG = {
-      telefono: "3321-0940",
+      
       instagram: "ykliquors",
       sucursales: [
         { id: "salcaja", nombre: "Salcajá", detalle: "Sucursal Salcajá" },
@@ -352,7 +352,7 @@
     var tel = soloDigitos(CONFIG.telefono);
     var enlaces = [
       { id: "whatsapp",  nombre: "WhatsApp",  dato: conGuion(CONFIG.telefono), href: "https://wa.me/50233210940" + tel, externo: true },
-      { id: "telefono",  nombre: "Llamar",    dato: conGuion(CONFIG.telefono), href: "tel:+50233210940" + tel, externo: false },
+     
       { id: "instagram", nombre: "Instagram", dato: "@" + limpiarUsuario(CONFIG.instagram), href: "https://www.instagram.com/ykliquors/" + limpiarUsuario(CONFIG.instagram) + "/", externo: true }
     ];
 
