@@ -2,346 +2,474 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>YK LIQUORS</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="YK LIQUORS, licorería en Salcajá y Xela. Contacto y redes sociales.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Figtree:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* Layout: etiqueta de botella. Cabecera simple, portada con siluetas de botellas, catalogo filtrable en rejilla, combos, nosotros y contacto. */
-:root {
-  --bg: #0a0a0a;
-  --surface: #151515;
-  --surface-2: #202020;
-  --fg: #f5f5f5;
-  --muted: #a6a6a6;
-  --line: #343434;
-  --accent: #ffffff;
-  --accent-ink: #0a0a0a;
-  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
-  --body: "Instrument Sans", system-ui, sans-serif;
-  --mono: "DM Mono", ui-monospace, monospace;
-}
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --bg: #ffffff; --surface: #f4f4f4; --surface-2: #e8e8e8; --fg: #0a0a0a; --muted: #555555;
-    --line: #d2d2d2; --accent: #0a0a0a; --accent-ink: #ffffff; color-scheme: light;
+  :root {
+    --bg: #000000;
+    --paper: #ffffff;
+    --card: #0c0c0c;
+    --card-2: #171717;
+    --muted: #a3a3a3;
+    --line: #3a3a3a;
+    --shadow: #5a5a5a;
+    --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --body: "Figtree", system-ui, sans-serif;
+    color-scheme: dark;
   }
-}
-:root[data-theme="light"] {
-  --bg: #ffffff; --surface: #f4f4f4; --surface-2: #e8e8e8; --fg: #0a0a0a; --muted: #555555;
-  --line: #d2d2d2; --accent: #0a0a0a; --accent-ink: #ffffff; color-scheme: light;
-}
-:root { color-scheme: dark; }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { color-scheme: light; } }
 
-* { box-sizing: border-box; }
-body {
-  background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55;
-}
-a { color: inherit; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.wrap {
-  max-width: 1120px; margin-inline: auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-}
-.age {
-  background: var(--accent); color: var(--accent-ink); font-family: var(--mono); font-size: 12px;
-  letter-spacing: .06em; text-transform: uppercase; text-align: center; padding-block: 8px;
-}
-header.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 18px; }
-.logo { font-family: var(--display); font-weight: 900; font-size: 30px; letter-spacing: .04em; text-decoration: none; line-height: 1; }
-.logo b { color: var(--accent); font-weight: 900; }
-nav { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; }
-nav a { text-decoration: none; color: var(--muted); }
-nav a:hover { color: var(--fg); }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html, body { min-height: 100%; background-color: var(--bg); color: var(--paper); }
+  body {
+    position: relative;
+    margin: 0;
+    font-family: var(--body);
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-block: 2.5rem 3rem;
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+    overflow-x: hidden;
+  }
+  :focus-visible { outline: 0.25rem solid var(--paper); outline-offset: 0.25rem; }
 
-.hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 32px; align-items: center; padding-block: 40px 56px; }
-.hero > * { min-width: 0; }
-.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
-h1 { font-family: var(--display); font-weight: 900; font-size: clamp(56px, 11vw, 132px); line-height: .88; margin: 0 0 20px; text-transform: uppercase; text-wrap: balance; }
-h1 span { color: var(--accent); }
-.lead { max-width: 46ch; color: var(--muted); font-size: 18px; margin: 0 0 28px; }
-.cta { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn { display: inline-block; padding: 13px 22px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--accent); border-radius: 4px; font-size: 15px; cursor: pointer; font-family: var(--body); }
-.btn.solid { background: var(--accent); color: var(--accent-ink); }
-.btn.ghost { background: transparent; color: var(--fg); }
-.btn:hover { filter: brightness(1.08); }
-.back { margin-bottom: 20px; padding: 8px 16px; font-size: 14px; }
-.bottles { width: 100%; max-width: 100%; height: auto; display: block; }
+  /* Dibujos de botellas y copas a los lados (solo en pantallas anchas) */
+  .lado { position: fixed; top: 0; width: 40vw; height: 100vh; pointer-events: none; z-index: 0; opacity: 0.2;
+    background-repeat: repeat-y; background-size: 12rem auto;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 240' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M30 210V100Q30 80 38 65V25H52V65Q60 80 60 100V210Z'/%3E%3Cpath d='M32 120H58M32 170H58'/%3E%3Cpath d='M120 210V92Q120 74 128 64V30H144V64Q152 74 152 92V210Z'/%3E%3Cpath d='M122 130H150V180H122Z'/%3E%3Cpath d='M205 40H255L243 112Q230 128 217 112Z'/%3E%3Cpath d='M230 128V190M210 196H250'/%3E%3C/svg%3E");
+  }
+  .lado-izq { left: 0; background-position: 0.5rem 0; }
+  .lado-der { right: 0; background-position: calc(100% - 0.5rem) 6rem; }
+  @media (max-width: 820px) { .lado { display: none; } }
 
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0; border-block: 1px solid var(--line); }
-.facts div { padding: 18px 16px; border-left: 1px solid var(--line); }
-.facts div:first-child { border-left: 0; }
-.facts strong { display: block; font-family: var(--display); font-size: 26px; letter-spacing: .03em; text-transform: uppercase; }
-.facts span { color: var(--muted); font-size: 14px; }
+  .page {
+    position: relative;
+    z-index: 10;
+    max-width: 30rem;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.25rem;
+  }
 
-section { padding-block: 64px 0; }
-h2 { font-family: var(--display); font-weight: 800; font-size: clamp(36px, 6vw, 56px); text-transform: uppercase; line-height: 1; margin: 0 0 8px; text-wrap: balance; }
-.sub { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+  /* Tarjeta principal */
+  .tarjeta {
+    width: 100%;
+    background: var(--card);
+    border: 0.1875rem solid var(--paper);
+    border-radius: 1.5rem;
+    padding: 1.5rem 1.25rem 1.75rem;
+    box-shadow: 0.375rem 0.375rem 0 var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .tarjeta::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 0.3rem;
+    background: repeating-linear-gradient(90deg, var(--paper) 0 1rem, var(--bg) 1rem 2rem);
+  }
+  .ojo { margin: 0; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+  .marca { margin: 0.5rem 0 0; display: flex; flex-direction: column; align-items: center; line-height: 0.85; }
+  .marca .yk { font-family: var(--display); font-weight: 900; font-size: clamp(6rem, 30vw, 9rem); letter-spacing: 0.02em; }
+  .marca .liq { display: flex; align-items: center; gap: 0.75rem; width: 100%; margin-top: 0.35rem;
+    font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 8vw, 2.4rem); letter-spacing: 0.32em; text-indent: 0.32em; }
+  .marca .liq::before, .marca .liq::after { content: ""; flex: 1; height: 0.1875rem; background: var(--paper); }
+  .lema { margin: 1rem 0 0; color: var(--muted); font-weight: 600; text-wrap: balance; }
 
-.chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-.chip { font-family: var(--body); font-size: 14px; font-weight: 500; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; cursor: pointer; }
-.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  /* Sucursal elegida, dentro de la tarjeta */
+  .sucursal-actual {
+    width: 100%;
+    margin-top: 1.4rem;
+    padding: 0.8rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    background: var(--card-2);
+    border: 0.125rem solid var(--line);
+    border-radius: 0.9rem;
+    text-align: left;
+  }
+  .sucursal-actual .pin { width: 1.6rem; height: 1.6rem; flex: none; fill: var(--paper); }
+  .sucursal-actual .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .sucursal-actual .etq { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+  .sucursal-actual .val { font-size: 1.2rem; font-weight: 800; line-height: 1.2; }
+  .btn-cambiar {
+    font-family: var(--body); font-size: 0.85rem; font-weight: 800; cursor: pointer;
+    background: var(--paper); color: #000; border: 0.125rem solid var(--paper); border-radius: 0.6rem;
+    padding: 0.5rem 0.8rem; flex: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-cambiar:hover { background: #000; color: var(--paper); }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.card[hidden] { display: none; }
-.cat { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
-.card h3 { font-family: var(--display); font-weight: 800; font-size: 25px; line-height: 1.05; margin: 0; text-transform: uppercase; }
-.card p { margin: 0; color: var(--muted); font-size: 14px; }
-.meta { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--line); }
-.spec { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-.price { font-family: var(--display); font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; }
-.note { font-family: var(--mono); font-size: 12px; color: var(--muted); margin-top: 18px; }
+  /* Botón de catálogo (todavía sin página) */
+  .cta {
+    width: 100%;
+    margin-top: 1.1rem;
+    padding: 0.9rem 1rem 0.9rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    border: 0.1875rem dashed var(--line);
+    border-radius: 1.15rem;
+    background: var(--card-2);
+    color: var(--muted);
+  }
+  .cta-icono { width: 3.4rem; height: 3.4rem; flex: none; border-radius: 0.95rem; background: #2a2a2a; display: grid; place-items: center; }
+  .cta-icono svg { width: 1.8rem; height: 1.8rem; fill: var(--muted); }
+  .cta-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 0.1rem; }
+  .cta-ojo { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase; }
+  .cta-titulo { font-size: 1.5rem; font-weight: 800; line-height: 1.1; color: var(--paper); opacity: 0.7; }
+  .cta .pronto { flex: none; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+    border: 0.125rem solid var(--muted); border-radius: 999px; padding: 0.3rem 0.65rem; }
 
-.combos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-.combo { background: var(--surface-2); border-radius: 6px; padding: 22px; min-width: 0; }
-.combo h3 { font-family: var(--display); font-weight: 800; font-size: 28px; text-transform: uppercase; margin: 0 0 6px; }
-.combo ul { margin: 10px 0 14px; padding-left: 18px; color: var(--muted); font-size: 15px; }
-.combo .price { color: var(--accent); }
+  /* Contacto y redes */
+  .contacto { width: 100%; display: flex; flex-direction: column; gap: 1rem; }
+  .contacto h2 { margin: 0 0 0.25rem; font-size: 0.875rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  .redes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+  .red {
+    display: flex; align-items: center; gap: 1rem;
+    width: 100%; padding: 0.85rem 1rem;
+    background: var(--card);
+    border: 0.1875rem solid var(--paper);
+    border-radius: 0.85rem;
+    box-shadow: 0.3rem 0.3rem 0 var(--shadow);
+    color: var(--paper);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+  .red .ico { width: 1.85rem; height: 1.85rem; flex: none; fill: currentColor; }
+  .red .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; text-align: left; }
+  .red .nombre { font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1.1; letter-spacing: 0.04em; text-transform: uppercase; }
+  .red .dato { font-size: 0.95rem; font-weight: 600; color: var(--muted); overflow-wrap: anywhere; transition: color 0.15s ease; }
+  .red .flecha { width: 1.2rem; height: 1.2rem; flex: none; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  .red:hover, .red:focus-visible { background: var(--paper); color: #000; transform: translate(-0.125rem, -0.125rem); box-shadow: 0.4rem 0.4rem 0 var(--shadow); }
+  .red:hover .dato, .red:focus-visible .dato { color: #404040; }
+  .red:active { transform: translate(0.125rem, 0.125rem); box-shadow: 0.1rem 0.1rem 0 var(--shadow); }
 
-.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-.about > * { min-width: 0; }
-.about p { color: var(--muted); max-width: 52ch; margin: 0 0 14px; }
-.pillars { display: grid; gap: 14px; }
-.pillars div { border-left: 3px solid var(--accent); padding-left: 14px; }
-.pillars strong { display: block; font-family: var(--display); font-size: 22px; text-transform: uppercase; letter-spacing: .02em; }
-.pillars span { color: var(--muted); font-size: 15px; }
+  .franja { width: 7.5rem; height: 0.75rem; border: 0.1875rem solid var(--paper); border-radius: 0.5rem; box-shadow: 0.2rem 0.2rem 0 var(--shadow);
+    background: repeating-linear-gradient(90deg, var(--paper) 0 0.5rem, var(--bg) 0.5rem 1rem); margin-inline: auto; }
+  .pie { margin: 0; font-weight: 600; text-align: center; color: var(--muted); text-wrap: balance; font-size: 0.9rem; }
+  .pie small { display: block; margin-top: 0.4rem; font-size: 0.78rem; font-weight: 500; }
 
-.contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
-.box { border: 1px solid var(--line); border-radius: 6px; padding: 20px; background: var(--surface); min-width: 0; }
-.box h3 { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; font-weight: 500; }
-.box p { margin: 0 0 6px; }
-.box .big { font-family: var(--display); font-size: 30px; font-weight: 800; letter-spacing: .03em; overflow-wrap: anywhere; }
-.copy { margin-top: 8px; font-size: 13px; padding: 6px 12px; }
+  /* Pestaña lateral de sucursal */
+  .tab-sucursal {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 0.65rem;
+    padding-right: max(0.65rem, env(safe-area-inset-right, 0px));
+    writing-mode: vertical-rl;
+    background: var(--paper);
+    color: #000;
+    border: 0.1875rem solid var(--paper);
+    border-right: 0;
+    border-radius: 0.9rem 0 0 0.9rem;
+    box-shadow: -0.25rem 0.25rem 0 var(--shadow);
+    font-family: var(--body);
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: padding 0.15s ease;
+  }
+  .tab-sucursal:hover { padding-inline: 0.85rem; }
+  .tab-sucursal svg { width: 1.2rem; height: 1.2rem; fill: currentColor; flex: none; }
 
-footer { margin-top: 72px; border-top: 1px solid var(--line); padding-block: 28px 36px; color: var(--muted); font-size: 13px; }
-footer p { margin: 0 0 6px; max-width: 70ch; }
+  .velo { position: fixed; inset: 0; z-index: 40; background: rgba(0, 0, 0, 0.75); opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; }
+  .velo.abierto { opacity: 1; visibility: visible; }
+  .panel {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 50;
+    width: min(22rem, 100%);
+    padding: 1.5rem 1.25rem;
+    padding-top: max(1.5rem, env(safe-area-inset-top, 0px));
+    padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+    background: var(--card);
+    border-left: 0.1875rem solid var(--paper);
+    display: flex; flex-direction: column; gap: 1rem;
+    transform: translateX(100%); visibility: hidden;
+    transition: transform 0.25s ease, visibility 0.25s ease;
+    overflow-y: auto;
+  }
+  .panel.abierto { transform: none; visibility: visible; }
+  .panel-cab { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .panel h2 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 2.2rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.03em; }
+  .cerrar { width: 2.6rem; height: 2.6rem; flex: none; display: grid; place-items: center; cursor: pointer; background: transparent; color: var(--paper);
+    border: 0.1875rem solid var(--paper); border-radius: 0.7rem; }
+  .cerrar svg { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+  .cerrar:hover { background: var(--paper); color: #000; }
+  .panel p { margin: 0; color: var(--muted); font-weight: 500; }
+  .opciones { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 0.4rem; }
+  .opcion {
+    display: flex; align-items: center; gap: 1rem; width: 100%; text-align: left; cursor: pointer;
+    padding: 1rem; font-family: var(--body); color: var(--paper);
+    background: var(--card-2); border: 0.1875rem solid var(--line); border-radius: 0.9rem;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .opcion .nom { font-family: var(--display); font-weight: 900; font-size: 2rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.04em; }
+  .opcion .det { display: block; font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+  .opcion .txt { flex: 1; min-width: 0; }
+  .opcion .marca-ok { width: 1.8rem; height: 1.8rem; flex: none; border-radius: 50%; border: 0.1875rem solid var(--line); display: grid; place-items: center; }
+  .opcion .marca-ok svg { width: 1rem; height: 1rem; fill: none; stroke: #000; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
+  .opcion:hover { border-color: var(--paper); }
+  .opcion[aria-pressed="true"] { background: var(--paper); color: #000; border-color: var(--paper); }
+  .opcion[aria-pressed="true"] .det { color: #404040; }
+  .opcion[aria-pressed="true"] .marca-ok { border-color: #000; background: #000; }
+  .opcion[aria-pressed="true"] .marca-ok svg { stroke: #fff; opacity: 1; }
+  .nota { font-size: 0.85rem; }
 
-@media (max-width: 760px) {
-  .hero { grid-template-columns: 1fr; padding-block: 24px 40px; }
-  .bottles { max-width: 320px; }
-  .about { grid-template-columns: 1fr; gap: 24px; }
-  .facts div { border-left: 0; border-top: 1px solid var(--line); }
-  .facts div:first-child { border-top: 0; }
-  section { padding-block: 48px 0; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .card, .btn, .chip { transition: transform .15s ease, filter .15s ease, border-color .15s ease; }
-  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
-}
+  /* En celular la pestaña pasa a una barra arriba para no tapar el contenido */
+  @media (max-width: 640px) {
+    body { padding-top: 4.5rem; }
+    .tab-sucursal {
+      top: max(0.75rem, env(safe-area-inset-top, 0px));
+      right: max(0.75rem, env(safe-area-inset-right, 0px));
+      transform: none;
+      writing-mode: horizontal-tb;
+      padding: 0.55rem 0.9rem;
+      border: 0.1875rem solid var(--paper);
+      border-radius: 999px;
+      box-shadow: 0.2rem 0.2rem 0 var(--shadow);
+      font-size: 0.85rem;
+    }
+    .tab-sucursal:hover { padding-inline: 0.9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
 </style>
+</head>
+<body>
 
-<div class="age">Venta exclusiva a mayores de 18 años · Bebe con responsabilidad</div>
+<div class="lado lado-izq" aria-hidden="true"></div>
+<div class="lado lado-der" aria-hidden="true"></div>
 
-<div class="wrap">
-  <header class="top">
-    <a class="logo" href="#inicio" data-view="inicio">YK <b>LIQUORS</b></a>
-    <nav aria-label="Principal">
-      <a href="#inicio" data-view="inicio">Inicio</a>
-      <a href="#catalogo" data-view="catalogo">Catálogo</a>
-      <a href="#combos" data-view="combos">Combos</a>
-      <a href="#nosotros" data-view="inicio" data-target="nosotros">Nosotros</a>
-      <a href="#contacto" data-view="inicio" data-target="contacto">Contacto</a>
-    </nav>
-  </header>
+<!-- Pestaña lateral para elegir sucursal -->
+<button class="tab-sucursal sin-elegir" id="tab-sucursal" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="panel-sucursal">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+  <span id="tab-texto">Elige sucursal</span>
+</button>
 
-  <main id="inicio">
-    <div class="hero home">
-      <div>
-        <p class="eyebrow">Licorería · Guatemala</p>
-        <h1>Lo que se brinda, <span>lo tenemos.</span></h1>
-        <p class="lead">Whisky, ron, tequila, vodka, vino y cerveza fría para tu reunión, tu regalo o tu fin de semana. Pide por WhatsApp o pasa a la tienda.</p>
-        <div class="cta">
-          <a class="btn solid" href="#catalogo" data-view="catalogo">Ver catálogo</a>
-          <a class="btn ghost" href="#combos" data-view="combos">Ver combos</a>
-        </div>
-      </div>
-      <svg class="bottles" viewBox="0 0 320 340" role="img" aria-label="Siluetas de tres botellas">
-        <g fill="var(--surface-2)" stroke="var(--line)" stroke-width="2">
-          <path d="M40 330V150q0-24 12-40l6-10V40h28v60l6 10q12 16 12 40v180z"/>
-          <path d="M120 330V130q0-30 18-52V20h26v58q18 22 18 52v200z"/>
-          <path d="M214 330V170q0-22 10-36l8-12V70h26v52l8 12q10 14 10 36v160z"/>
-        </g>
-        <g fill="var(--accent)">
-          <rect x="46" y="190" width="64" height="70" rx="3"/>
-          <rect x="130" y="180" width="64" height="86" rx="3"/>
-          <rect x="220" y="204" width="64" height="62" rx="3"/>
-        </g>
-        <g fill="var(--accent-ink)" font-family="Big Shoulders Display, Impact, sans-serif" font-weight="900" font-size="26" text-anchor="middle">
-          <text x="78" y="236">YK</text>
-          <text x="162" y="232">YK</text>
-          <text x="252" y="245">YK</text>
-        </g>
-        <rect x="10" y="328" width="300" height="3" fill="var(--line)"/>
-      </svg>
+<div class="velo" id="velo"></div>
+<aside class="panel" id="panel-sucursal" role="dialog" aria-modal="true" aria-labelledby="panel-titulo">
+  <div class="panel-cab">
+    <h2 id="panel-titulo">Elige tu sucursal</h2>
+    <button class="cerrar" id="cerrar" type="button" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div>
+  <p>Los productos disponibles cambian según la sucursal.</p>
+  <div class="opciones" id="opciones" role="group" aria-label="Sucursales"></div>
+  <p class="nota">Tu elección se guarda en este navegador.</p>
+</aside>
+
+<main class="page">
+  <section class="tarjeta" aria-labelledby="titulo-marca">
+    <p class="ojo">Licorería · Salcajá y Xela</p>
+    <h1 class="marca" id="titulo-marca" aria-label="YK LIQUORS">
+      <span class="yk" aria-hidden="true">YK</span>
+      <span class="liq" aria-hidden="true">LIQUORS</span>
+    </h1>
+    <p class="lema">Licores, vinos y más para tu próxima reunión.</p>
+
+    <div class="sucursal-actual">
+      <svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+      <span class="txt"><span class="etq">Tu sucursal</span><span class="val" id="sucursal-val">Sin elegir</span></span>
+      <button class="btn-cambiar" id="btn-cambiar" type="button">Elegir</button>
     </div>
 
-    <div class="facts home">
-      <div><strong>750 ml · 1 L</strong><span>Presentaciones para cada ocasión</span></div>
-      <div><strong>Precios en Q</strong><span>Quetzales, con factura</span></div>
-      <div><strong>Bebidas frías</strong><span>Cerveza y vinos listos para llevar</span></div>
-      <div><strong>Solo +18</strong><span>Pedimos identificación</span></div>
+    <div class="cta" role="note" aria-label="Catálogo, muy pronto">
+      <span class="cta-icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3h11a3 3 0 0 1 3 3v13a2 2 0 0 1-2 2H7a3 3 0 0 1-3-3V4a1 1 0 0 1 1-1Zm1 2v12.2A3 3 0 0 1 7 17h10V6a1 1 0 0 0-1-1H6Zm2.5 3h6v1.8h-6V8Zm0 3.2h6V13h-6v-1.8ZM7 19h10v2H7a1 1 0 0 1 0-2Z"/></svg></span>
+      <span class="cta-txt"><span class="cta-ojo">Estamos armando</span><span class="cta-titulo">Nuestro catálogo</span></span>
+      <span class="pronto">Pronto</span>
     </div>
+  </section>
 
-    <section id="catalogo" class="view" hidden>
-      <button class="btn ghost back" type="button" data-view="inicio">← Volver al inicio</button>
-      <h2>Catálogo</h2>
-      <p class="sub">Filtra por tipo de bebida. Los productos y precios de abajo son de ejemplo; reemplázalos con tu inventario real.</p>
-      <div class="chips" role="group" aria-label="Filtrar por categoría" id="chips"></div>
-      <div class="grid" id="grid"></div>
-      <p class="note">Ejemplo: precios en quetzales (Q), IVA incluido. Sujetos a disponibilidad.</p>
-    </section>
+  <section class="contacto" aria-labelledby="contacto-titulo">
+    <h2 id="contacto-titulo">Escríbenos o llámanos</h2>
+    <ul class="redes" id="redes"></ul>
+    <noscript><p class="pie">Activa JavaScript para ver los datos de contacto.</p></noscript>
+  </section>
 
-    <section id="combos" class="view" hidden>
-      <button class="btn ghost back" type="button" data-view="inicio">← Volver al inicio</button>
-      <h2>Combos</h2>
-      <p class="sub">Paquetes armados para que no tengas que pensar en cuánto comprar.</p>
-      <div class="combos">
-        <div class="combo">
-          <h3>Pre-fiesta</h3>
-          <ul><li>1 botella de ron añejo 750 ml</li><li>1 botella de vodka 750 ml</li><li>Hielo y 6 bebidas mezcladoras</li></ul>
-          <span class="price">Q 450</span>
-        </div>
-        <div class="combo">
-          <h3>Cena en casa</h3>
-          <ul><li>2 botellas de vino tinto</li><li>1 botella de vino blanco</li><li>1 licor de sobremesa</li></ul>
-          <span class="price">Q 520</span>
-        </div>
-        <div class="combo">
-          <h3>Regalo</h3>
-          <ul><li>Whisky 12 años 750 ml</li><li>Estuche de regalo</li><li>Tarjeta con tu mensaje</li></ul>
-          <span class="price">Q 340</span>
-        </div>
-      </div>
-      <p class="note">Ejemplo: combos y precios de muestra.</p>
-    </section>
-
-    <section id="nosotros" class="home">
-      <div class="about">
-        <div>
-          <h2>Una licorería de barrio, bien surtida</h2>
-          <p>YK LIQUORS reúne destilados, vinos y cervezas de todos los estilos en un solo lugar, con precios claros y atención directa.</p>
-          <p>Te ayudamos a elegir según la ocasión y el presupuesto, sin vueltas.</p>
-        </div>
-        <div class="pillars">
-          <div><strong>Surtido amplio</strong><span>Desde lo de todos los días hasta botellas para regalar.</span></div>
-          <div><strong>Precio a la vista</strong><span>Lo que ves en el catálogo es lo que pagas.</span></div>
-          <div><strong>Venta responsable</strong><span>No vendemos a menores de 18 años. Si conduces, no bebas.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contacto" class="home">
-      <h2>Contacto</h2>
-      <p class="sub">Escríbenos para pedidos, disponibilidad o pedidos grandes para eventos.</p>
-      <div class="contact">
-        <div class="box">
-          <h3>WhatsApp</h3>
-          <p class="big" id="phone">+502 0000 0000</p>
-          <p style="color:var(--muted);font-size:14px">Número de ejemplo.</p>
-          <button class="btn ghost copy" id="copyBtn" type="button">Copiar número</button>
-        </div>
-        <div class="box">
-          <h3>Dirección</h3>
-          <p class="big">Ciudad de Guatemala</p>
-          <p style="color:var(--muted);font-size:14px">Agrega aquí la zona y la calle de la tienda.</p>
-        </div>
-        <div class="box">
-          <h3>Horario</h3>
-          <p class="big">Lun a Sáb</p>
-          <p style="color:var(--muted);font-size:14px">Horario de ejemplo: 10:00 a 21:00.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p><strong>YK LIQUORS</strong> · Todos los derechos reservados.</p>
-    <p>El exceso de alcohol es dañino para la salud. Prohibida la venta a menores de 18 años.</p>
-  </footer>
-</div>
+  <div class="franja" aria-hidden="true"></div>
+  <p class="pie">© 2026 YK LIQUORS<br>Todos los derechos reservados
+    <small>Venta exclusiva a mayores de 18 años. El exceso de alcohol es dañino para la salud.</small>
+  </p>
+</main>
 
 <script>
-(function () {
-  var items = [
-    { n: "Whisky escocés 12 años", c: "Whisky", d: "Suave, notas de miel y roble. Para tomar solo o con hielo.", s: "750 ml · 40% vol", p: 285 },
-    { n: "Whisky bourbon", c: "Whisky", d: "Dulce y especiado, ideal para cócteles clásicos.", s: "750 ml · 43% vol", p: 210 },
-    { n: "Ron añejo 12 años", c: "Ron", d: "Reposado en barrica, aroma a caramelo y frutos secos.", s: "750 ml · 40% vol", p: 260 },
-    { n: "Ron blanco", c: "Ron", d: "Ligero y limpio, base para mojitos y daiquiris.", s: "750 ml · 37.5% vol", p: 95 },
-    { n: "Tequila reposado", c: "Tequila", d: "100% agave, seis meses en barrica.", s: "750 ml · 38% vol", p: 230 },
-    { n: "Tequila blanco", c: "Tequila", d: "Fresco y vegetal, para margaritas y shots.", s: "750 ml · 40% vol", p: 175 },
-    { n: "Vodka premium", c: "Vodka", d: "Triple destilado, perfil neutro y limpio.", s: "750 ml · 40% vol", p: 150 },
-    { n: "Vino tinto reserva", c: "Vino", d: "Cuerpo medio, taninos suaves. Va con carnes y pastas.", s: "750 ml · 13.5% vol", p: 135 },
-    { n: "Vino blanco seco", c: "Vino", d: "Cítrico y fresco, sirve bien frío.", s: "750 ml · 12% vol", p: 110 },
-    { n: "Cerveza lager, six pack", c: "Cerveza", d: "Ligera y refrescante, lista para el hielo.", s: "6 × 355 ml · 4.5% vol", p: 62 },
-    { n: "Cerveza artesanal IPA", c: "Cerveza", d: "Amarga y aromática, lúpulo cítrico.", s: "355 ml · 6.5% vol", p: 28 },
-    { n: "Licor de café", c: "Licores", d: "Dulce, para postres o con leche fría.", s: "700 ml · 20% vol", p: 120 }
-  ];
-  var cats = ["Todos"];
-  items.forEach(function (i) { if (cats.indexOf(i.c) < 0) cats.push(i.c); });
+  /* ===== DATOS DE LA TIENDA: cambia solo esta parte =====
+     telefono: 8 números de Guatemala, con o sin guion.
+     instagram, facebook, tiktok: el nombre de usuario, sin @ ni enlace.
+     Los valores de abajo son de ejemplo. */
+  var CONFIG = {
+    telefono: "0000-0000",
+    instagram: "tu_instagram",
+    facebook: "tu_pagina",
+    tiktok: "tu_tiktok",
+    sucursales: [
+      { id: "salcaja", nombre: "Salcajá", detalle: "Sucursal Salcajá" },
+      { id: "xela",    nombre: "Xela",    detalle: "Quetzaltenango" }
+    ]
+  };
 
-  var chips = document.getElementById("chips");
-  var grid = document.getElementById("grid");
+  (function () {
+    var ICONOS = {
+      whatsapp: '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 4.54 0 8.23 3.69 8.23 8.23s-3.69 8.24-8.23 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.07-.1-.23-.16-.48-.28Z"/>',
+      telefono: '<path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/>',
+      instagram: '<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 1.8A3.8 3.8 0 0 0 3.8 7.6v8.8a3.8 3.8 0 0 0 3.8 3.8h8.8a3.8 3.8 0 0 0 3.8-3.8V7.6a3.8 3.8 0 0 0-3.8-3.8H7.6Zm9.65 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 6.9a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2Zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Z"/>',
+      facebook: '<path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.95.4-1.7 1.8-1.7h1.6V3.2C16.6 3.1 15.6 3 14.6 3c-2.7 0-4.4 1.6-4.4 4.5v3H7.4v3.3h2.8V22h3.3Z"/>',
+      tiktok: '<path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48Z"/>'
+    };
+    var FLECHA = '<path d="M9 5l7 7-7 7"/>';
+    var SVGNS = "http://www.w3.org/2000/svg";
 
-  function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+    function limpiarUsuario(u) { return String(u).replace(/^@/, "").trim(); }
+    function soloDigitos(t) { return String(t).replace(/\D/g, ""); }
+    function conGuion(t) { var d = soloDigitos(t); return d.length === 8 ? d.slice(0, 4) + "-" + d.slice(4) : t; }
 
-  items.forEach(function (i) {
-    var el = document.createElement("article");
-    el.className = "card";
-    el.setAttribute("data-cat", i.c);
-    el.innerHTML = '<span class="cat">' + esc(i.c) + '</span><h3>' + esc(i.n) + '</h3><p>' + esc(i.d) +
-      '</p><div class="meta"><span class="spec">' + esc(i.s) + '</span><span class="price">Q ' + i.p + '</span></div>';
-    grid.appendChild(el);
-  });
-
-  cats.forEach(function (c, idx) {
-    var b = document.createElement("button");
-    b.type = "button"; b.className = "chip"; b.textContent = c;
-    b.setAttribute("aria-pressed", idx === 0 ? "true" : "false");
-    b.addEventListener("click", function () {
-      chips.querySelectorAll(".chip").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
-      b.setAttribute("aria-pressed", "true");
-      grid.querySelectorAll(".card").forEach(function (card) {
-        card.hidden = !(c === "Todos" || card.getAttribute("data-cat") === c);
-      });
-    });
-    chips.appendChild(b);
-  });
-
-  var homes = document.querySelectorAll(".home");
-  var views = document.querySelectorAll(".view");
-  function show(name, target) {
-    var inHome = name === "inicio";
-    homes.forEach(function (h) { h.hidden = !inHome; });
-    views.forEach(function (v) { v.hidden = v.id !== name; });
-    var el = target ? document.getElementById(target) : null;
-    if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
-  }
-  document.querySelectorAll("[data-view]").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      e.preventDefault();
-      show(a.getAttribute("data-view"), a.getAttribute("data-target"));
-    });
-  });
-
-  var btn = document.getElementById("copyBtn");
-  btn.addEventListener("click", function () {
-    var txt = document.getElementById("phone").textContent;
-    var done = function () { btn.textContent = "Copiado"; setTimeout(function () { btn.textContent = "Copiar número"; }, 1500); };
-    try {
-      navigator.clipboard.writeText(txt).then(done, function () {
-        var r = document.createRange(); r.selectNodeContents(document.getElementById("phone"));
-        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
-      });
-    } catch (e) {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById("phone"));
-      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    function svg(clase, path) {
+      var s = document.createElementNS(SVGNS, "svg");
+      s.setAttribute("class", clase);
+      s.setAttribute("viewBox", "0 0 24 24");
+      s.setAttribute("aria-hidden", "true");
+      s.innerHTML = path;
+      return s;
     }
-  });
-})();
-</script>
 
+    /* ---- Lista de contacto y redes ---- */
+    var tel = soloDigitos(CONFIG.telefono);
+    var enlaces = [
+      { id: "whatsapp",  nombre: "WhatsApp",  dato: conGuion(CONFIG.telefono), href: "https://wa.me/502" + tel, externo: true },
+      { id: "telefono",  nombre: "Llamar",    dato: conGuion(CONFIG.telefono), href: "tel:+502" + tel, externo: false },
+      { id: "instagram", nombre: "Instagram", dato: "@" + limpiarUsuario(CONFIG.instagram), href: "https://www.instagram.com/" + limpiarUsuario(CONFIG.instagram), externo: true },
+      { id: "facebook",  nombre: "Facebook",  dato: limpiarUsuario(CONFIG.facebook), href: "https://www.facebook.com/" + limpiarUsuario(CONFIG.facebook), externo: true },
+      { id: "tiktok",    nombre: "TikTok",    dato: "@" + limpiarUsuario(CONFIG.tiktok), href: "https://www.tiktok.com/@" + limpiarUsuario(CONFIG.tiktok), externo: true }
+    ];
+    var lista = document.getElementById("redes");
+    enlaces.forEach(function (e) {
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.className = "red";
+      a.id = "link-" + e.id;
+      a.href = e.href;
+      if (e.externo) { a.target = "_blank"; a.rel = "noopener"; }
+      a.appendChild(svg("ico", ICONOS[e.id]));
+      var txt = document.createElement("span"); txt.className = "txt";
+      var n = document.createElement("span"); n.className = "nombre"; n.textContent = e.nombre;
+      var d = document.createElement("span"); d.className = "dato"; d.textContent = e.dato;
+      txt.appendChild(n); txt.appendChild(d);
+      a.appendChild(txt);
+      a.appendChild(svg("flecha", FLECHA));
+      li.appendChild(a);
+      lista.appendChild(li);
+    });
+
+    /* ---- Sucursal ---- */
+    var CLAVE = "yk-sucursal";
+    var elegida = null;
+    try { elegida = localStorage.getItem(CLAVE); } catch (e) {}
+    if (!CONFIG.sucursales.some(function (s) { return s.id === elegida; })) elegida = null;
+
+    var tab = document.getElementById("tab-sucursal");
+    var tabTexto = document.getElementById("tab-texto");
+    var val = document.getElementById("sucursal-val");
+    var btnCambiar = document.getElementById("btn-cambiar");
+    var panel = document.getElementById("panel-sucursal");
+    var velo = document.getElementById("velo");
+    var cerrar = document.getElementById("cerrar");
+    var contenedor = document.getElementById("opciones");
+    var botones = [];
+
+    CONFIG.sucursales.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "opcion";
+      b.setAttribute("data-id", s.id);
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="txt"><span class="nom"></span><span class="det"></span></span>' +
+        '<span class="marca-ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>';
+      b.querySelector(".nom").textContent = s.nombre;
+      b.querySelector(".det").textContent = s.detalle;
+      b.addEventListener("click", function () { elegir(s.id); });
+      contenedor.appendChild(b);
+      botones.push(b);
+    });
+
+    function nombreDe(id) {
+      for (var i = 0; i < CONFIG.sucursales.length; i++) if (CONFIG.sucursales[i].id === id) return CONFIG.sucursales[i].nombre;
+      return "";
+    }
+
+    function pintar() {
+      var hay = !!elegida;
+      tabTexto.textContent = hay ? "Sucursal: " + nombreDe(elegida) : "Elige sucursal";
+      val.textContent = hay ? nombreDe(elegida) : "Sin elegir";
+      btnCambiar.textContent = hay ? "Cambiar" : "Elegir";
+      tab.classList.toggle("sin-elegir", !hay);
+      botones.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-id") === elegida ? "true" : "false"); });
+    }
+
+    function elegir(id) {
+      elegida = id;
+      try { localStorage.setItem(CLAVE, id); } catch (e) {}
+      pintar();
+      document.dispatchEvent(new CustomEvent("sucursal", { detail: id }));
+      setTimeout(cerrarPanel, 250);
+    }
+
+    var anterior = null;
+    function abrirPanel() {
+      anterior = document.activeElement;
+      panel.classList.add("abierto");
+      velo.classList.add("abierto");
+      tab.setAttribute("aria-expanded", "true");
+      var objetivo = panel.querySelector('.opcion[aria-pressed="true"]') || botones[0];
+      setTimeout(function () { objetivo.focus(); }, 60);
+    }
+    function cerrarPanel() {
+      if (!panel.classList.contains("abierto")) return;
+      panel.classList.remove("abierto");
+      velo.classList.remove("abierto");
+      tab.setAttribute("aria-expanded", "false");
+      if (anterior && anterior.focus) anterior.focus();
+    }
+
+    tab.addEventListener("click", abrirPanel);
+    btnCambiar.addEventListener("click", abrirPanel);
+    cerrar.addEventListener("click", cerrarPanel);
+    velo.addEventListener("click", cerrarPanel);
+    document.addEventListener("keydown", function (e) {
+      if (!panel.classList.contains("abierto")) return;
+      if (e.key === "Escape") { cerrarPanel(); return; }
+      if (e.key === "Tab") {
+        var f = panel.querySelectorAll("button");
+        var primero = f[0], ultimo = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+        else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+      }
+    });
+
+    pintar();
+  })();
+</script>
+</body>
 </html>
